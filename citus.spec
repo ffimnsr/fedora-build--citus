@@ -1,7 +1,7 @@
-%global pglibdir /usr/lib64/pgsql
-%global pgsharedir /usr/share/pgsql
-%global pgincludedir /usr/include/pgsql
-%global pgdebuginfodir /usr/lib/debug/usr/lib64/pgsql
+%global pglibdir %{_libdir}/pgsql
+%global pgdatadir %{_datadir}/pgsql
+%global pgincludedir %{_includedir}/pgsql
+%global pgdebugdir %{_prefix}/lib/debug/usr/%{_lib}/pgsql
 
 Name: citus
 Version: 12.0.0
@@ -20,13 +20,25 @@ BuildRequires: glibc-common
 Requires: postgresql-server
 
 %description
-Citus is a PostgreSQL extension that transforms Postgres into a distributed database.
+Citus is a PostgreSQL extension that transforms Postgres into a
+distributed database.
 
-#%package devel
-#Summary: The header files of citus
+%package devel
+Summary: The header files of citus
+Requires: llvm clang
 
-#%package debuginfo
-#Summary: The debug symbols needed to debug citus extension
+%description devel
+The citus-devel package contains the header files needed to compile a C or C++
+applications which will directly interact with the citus extension in
+PostgreSQL.
+
+%package debug
+Summary: The debug symbols needed to debug citus extension
+Requires: postgresql-server-devel
+
+%description debug
+The citus-debug contains all the needed debug symbols for debugging the
+citus extension.
 
 %prep
 %setup -q -n citus -c -T
@@ -34,7 +46,7 @@ tar -xzf %{SOURCE0} --strip-components=1
 
 %build
 export PG_CONFIG=/usr/bin/pg_config
-%configure
+%configure --disable-debug
 %make_build
 
 %install
@@ -42,18 +54,22 @@ export PG_CONFIG=/usr/bin/pg_config
 
 %files
 %{pglibdir}/citus*
-%{pglibdir}/bitcode/*
-%{pgsharedir}/extension/*.control
-%{pgsharedir}/extension/*.sql
+%{pglibdir}/bitcode
+%{pgdatadir}/extension/*.control
+%{pgdatadir}/extension/*.sql
 %license LICENSE
 %doc README.md CHANGELOG.md SECURITY.md NOTICE
 
-#%files
-#%{pgincludedir}/server/*
+%files devel
+%{pgincludedir}/server/*
+%license LICENSE
+%doc README.md
 
-#%files debuginfo
-#%{pgdebuginfodir}/*
-#%{pgdebuginfodir}/citus_decoders/*
+%files debug
+%{pgdebugdir}/*
+%{pgdebugdir}/citus_decoders/*
+%license LICENSE
+%doc README.md
 
 %changelog
 %autochangelog

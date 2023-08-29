@@ -1,0 +1,24 @@
+2023-08-28 20:10:03,453 - Mock Version: 5.0
+2023-08-28 20:10:03,476 - Start(bootstrap): chroot init
+2023-08-28 20:10:03,571 - Start(bootstrap): cleaning package manager metadata
+2023-08-28 20:10:03,571 - Finish(bootstrap): cleaning package manager metadata
+2023-08-28 20:10:04,298 - Finish(bootstrap): chroot init
+2023-08-28 20:10:04,310 - Start: chroot init
+2023-08-28 20:10:04,358 - Start: unpacking root cache
+2023-08-28 20:10:05,283 - Finish: unpacking root cache
+2023-08-28 20:10:05,292 - Start: cleaning package manager metadata
+2023-08-28 20:10:05,295 - Finish: cleaning package manager metadata
+2023-08-28 20:10:05,977 - Start: dnf update
+2023-08-28 20:10:13,264 - Finish: dnf update
+2023-08-28 20:10:17,213 - Finish: chroot init
+2023-08-28 20:10:17,217 - Start: build phase for citus-12.0.0-2.fc38.src.rpm
+2023-08-28 20:10:17,221 - Start: build setup for citus-12.0.0-2.fc38.src.rpm
+2023-08-28 20:11:40,515 - Finish: build setup for citus-12.0.0-2.fc38.src.rpm
+2023-08-28 20:11:40,517 - Start: Outputting list of installed packages
+2023-08-28 20:11:40,886 - Finish: Outputting list of installed packages
+2023-08-28 20:11:40,887 - Start: rpmbuild citus-12.0.0-2.fc38.src.rpm
+2023-08-28 20:13:24,595 - Finish: rpmbuild citus-12.0.0-2.fc38.src.rpm
+2023-08-28 20:13:24,615 - Finish: build phase for citus-12.0.0-2.fc38.src.rpm
+2023-08-28 20:13:24,626 - Start: clean chroot
+2023-08-28 20:13:30,877 - Finish: clean chroot
+2023-08-28 20:13:30,880 - Finish: run
