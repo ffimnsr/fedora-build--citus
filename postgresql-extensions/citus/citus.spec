@@ -1,7 +1,7 @@
 %global pglibdir %{_libdir}/pgsql
 %global pgdatadir %{_datadir}/pgsql
 %global pgincludedir %{_includedir}/pgsql
-%global pgdebugdir %{_prefix}/lib/debug/usr/%{_lib}/pgsql
+%global pgdebugdir %{_usr}/lib/debug
 
 Name: citus
 Version: 12.0.0
@@ -32,21 +32,13 @@ The citus-devel package contains the header files needed to compile a C or C++
 applications which will directly interact with the citus extension in
 PostgreSQL.
 
-%package debug
-Summary: The debug symbols needed to debug citus extension
-Requires: postgresql-server-devel
-
-%description debug
-The citus-debug contains all the needed debug symbols for debugging the
-citus extension.
-
 %prep
 %setup -q -n citus -c -T
 tar -xzf %{SOURCE0} --strip-components=1
 
 %build
 export PG_CONFIG=/usr/bin/pg_config
-%configure --disable-debug
+%configure
 %make_build
 
 %install
@@ -57,17 +49,12 @@ export PG_CONFIG=/usr/bin/pg_config
 %{pglibdir}/bitcode
 %{pgdatadir}/extension/*.control
 %{pgdatadir}/extension/*.sql
+%exclude %{pgdebugdir}
 %license LICENSE
 %doc README.md CHANGELOG.md SECURITY.md NOTICE
 
 %files devel
 %{pgincludedir}/server/*
-%license LICENSE
-%doc README.md
-
-%files debug
-%{pgdebugdir}/*
-%{pgdebugdir}/citus_decoders/*
 %license LICENSE
 %doc README.md
 
