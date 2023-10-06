@@ -12,10 +12,11 @@ Summary: Powerful text-search and analytics to Postgres by using Elasticsearch
 
 License: GPLv3
 URL: https://github.com/zombodb/zombodb.git
-Source0: https://github.com/zombodb/zombodb/archive/refs/tags/v3000.1.24.tar.gz
+Source0: https://github.com/zombodb/zombodb/tarball/refs/heads/master
 
-BuildRequires: make redhat-rpm-config
-BuildRequires: postgresql-server-devel
+BuildRequires: make flex bison redhat-rpm-config
+BuildRequires: openssl-devel zlib-devel
+BuildRequires: postgresql-server-devel postgresql-server
 BuildRequires: rust rustfmt cargo
 BuildRequires: glibc-common
 Requires: postgresql-server
@@ -31,9 +32,9 @@ tar -xzf %{SOURCE0} --strip-components=1
 
 %build
 export PG_CONFIG=/usr/bin/pg_config
-export PG15_CONFIG=/usr/bin/pg_config
+export PG15_PG_CONFIG=/usr/bin/pg_config
 cargo install cargo-pgrx && cargo pgrx init
-cargo pgrx build --release
+cargo build --release
 
 %install
 cargo pgrx install --release
